@@ -1,0 +1,26 @@
+<orders>
+	<order id="1">
+		<sku>P1</sku>
+		<price>100</price>
+		<address type="shipping">
+			<city>Hyderabad</city>
+			<state>AP</state>
+		</address>
+		<address type="billing">
+			<city>Bangalore</city>
+			<state>KL</state>
+		</address>		
+	</order>
+	<order id="2">
+		<sku>P2</sku>
+		<price>100</price>
+		<address type="shipping">
+			<city>Hyderabad</city>
+			<state>AP</state>
+		</address>
+		<address type="billing">
+			<city>Bangalore</city>
+			<state>KL</state>
+		</address>		
+	</order>
+</orders>

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/adminLayout.xhtml">
+
+
+	<ui:define name="bodyContent">
+		<p:growl id="msg" escape="false"/>
+		<h:form>
+		
+		<p:pickList id="pojoPickList" value="#{rolePrivilegesController.privilegesModel}"  var="privilege"
+			converter="privilegeConverter" itemValue="#{privilege}"
+			itemLabel="#{privilege.name}" showSourceFilter="true"
+			showTargetFilter="true" showCheckbox="true"
+			filterMatchMode="contains" effect="bounce" >
+			
+			<f:facet name="sourceCaption">Available Privileges</f:facet>
+			<f:facet name="targetCaption">Assigned Privileges</f:facet>
+			<p:ajax event="transfer" listener="#{rolePrivilegesController.onTransfer}" update=":msg" />
+			<p:column style="width:100%">
+				#{privilege.name}
+			</p:column>
+			
+		</p:pickList>
+		
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>
