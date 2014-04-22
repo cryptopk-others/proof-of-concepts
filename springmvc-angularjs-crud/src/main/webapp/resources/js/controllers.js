@@ -1,5 +1,18 @@
 var appControllers = angular.module('appControllers', []);
 
+appControllers.controller('ProfileController',['$scope', '$http',function($scope, $http){
+	$scope.genderOptions = [
+	                        { key: 'M', label: 'Male' },
+	                        { key: 'F', label: 'Female' }
+	                        ];
+	
+	$scope.countriesOptions = {
+			'IND': 'India',
+			'USA': 'United States',
+			'UK': 'United Kingdom'
+	};
+}]);
+
 appControllers.controller('UserController',['$scope', '$http',function($scope, $http){
 	
 	$scope.loadUsers = function(){
@@ -13,8 +26,8 @@ appControllers.controller('UserController',['$scope', '$http',function($scope, $
 	};
 	
 	$scope.loadHome = function(){
-		$scope.resetAll();
 		$scope.loadUsers();
+		$scope.resetAll();
 	};
 	
 	$scope.resetAll = function(){
@@ -24,6 +37,8 @@ appControllers.controller('UserController',['$scope', '$http',function($scope, $
 	};
 	
 	$scope.searchUsers = function(){
+		$scope.newUser = null;
+		$scope.currentUser = null;
 		$http.get('rest/users/search?query='+$scope.query)
 		.success(function(data, status, headers, config){
 			$scope.users = data;
@@ -34,7 +49,7 @@ appControllers.controller('UserController',['$scope', '$http',function($scope, $
 	
 	$scope.newUserForm = function(){
 		$scope.resetAll();
-		$scope.newUser = {};
+		$scope.newUser = { };
 	};
 	
 	$scope.editUserForm = function(userId){
@@ -75,12 +90,32 @@ appControllers.controller('UserController',['$scope', '$http',function($scope, $
 		});
 	};
 	
+	$scope.sortField = undefined;
+	$scope.reverse = false;
+	
+	$scope.sort = function (fieldName) {
+		if ($scope.sortField === fieldName) {
+			$scope.reverse = !$scope.reverse;
+		} else {
+			$scope.sortField = fieldName;
+			$scope.reverse = false;
+		}
+	};
+		
+	$scope.isSortUp = function (fieldName) {
+		return $scope.sortField === fieldName && !$scope.reverse;
+	};
+		
+	$scope.isSortDown = function (fieldName) {
+		return $scope.sortField === fieldName && $scope.reverse;
+	};
+		
 	$scope.loadHome();
 }]);
 
 appControllers.controller('RoleController',['$scope', '$http','$routeParams', function($scope, $http, $routeParams){
 	
-	$scope.loadUsers = function(){
+	$scope.loadRoles = function(){
 		$http.get('rest/roles/')
 			.success(function(data, status, headers, config){
 				$scope.roles = data;
@@ -89,5 +124,18 @@ appControllers.controller('RoleController',['$scope', '$http','$routeParams', fu
 				alert('Error');
 			});
 	};
-	$scope.loadUsers();
+	
+	$scope.selectRole = function (role) {
+		$scope.selectedRole = role;
+	};
+	
+	$scope.hasSelectedRole = function () {
+		//console.log($scope.selectedRole != null);
+		return $scope.selectedRole != null;
+	};
+	
+	$scope.showNewRoleForm = function(){
+		$scope.newRole = {};
+	}
+	$scope.loadRoles();
 }]);

@@ -11,6 +11,10 @@ myApp.config(['$routeProvider',
             	templateUrl: 'views/roles.html',
                 controller: 'RoleController'
             }).
+            when('/profile', {
+            	templateUrl: 'views/profile.html',
+                controller: 'ProfileController'
+            }).
             otherwise({
               redirectTo: '/users'
             });

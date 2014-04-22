@@ -1,4 +1,6 @@
 <br/>
+<button ng-click="showNewRoleForm()">New Role</button>
+<br/>
 <table class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>
@@ -7,9 +9,31 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="role in roles">
+		<tr ng-repeat="role in roles" ng-click="selectRole(role)">
 			<td>{{role.id}}</td>
 			<td>{{role.roleName}}</td>
 		</tr>
 	</tbody>
 </table>
+<div ng-switch on="hasSelectedRole()">
+<div ng-switch-when="true">
+	<div class="panel panel-primary">
+		<div class="panel-heading">Role Details</div>
+		<div class="panel-body">
+	
+			<form role="form" name="role_form">
+			
+				<div class="form-group">
+					<label for="id">Id</label> <input type="text" class="form-control" id="id" ng-model="selectedRole.id"/>
+				</div>
+				<div class="form-group">
+					<label for="roleName">Name</label> <input type="text" class="form-control" id="roleName" ng-model="selectedRole.roleName"/>
+				</div>			
+				
+			</form>
+		</div>		
+	</div>
+</div>
+</div>
+
+<div ng-include="newRole && 'views/new-role.html'"/>
