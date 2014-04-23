@@ -1,19 +1,6 @@
-var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('ProfileController',['$scope', '$http',function($scope, $http){
-	$scope.genderOptions = [
-	                        { key: 'M', label: 'Male' },
-	                        { key: 'F', label: 'Female' }
-	                        ];
-	
-	$scope.countriesOptions = {
-			'IND': 'India',
-			'USA': 'United States',
-			'UK': 'United Kingdom'
-	};
-}]);
-
-appControllers.controller('UserController',['$scope', '$http',function($scope, $http){
+angular.module('users',[])
+.controller('UserController',['$scope', '$http',function($scope, $http){
 	
 	$scope.loadUsers = function(){
 		$http.get('rest/users/')
@@ -111,31 +98,4 @@ appControllers.controller('UserController',['$scope', '$http',function($scope, $
 	};
 		
 	$scope.loadHome();
-}]);
-
-appControllers.controller('RoleController',['$scope', '$http','$routeParams', function($scope, $http, $routeParams){
-	
-	$scope.loadRoles = function(){
-		$http.get('rest/roles/')
-			.success(function(data, status, headers, config){
-				$scope.roles = data;
-			})
-			.error(function(data, status, headers, config){
-				alert('Error');
-			});
-	};
-	
-	$scope.selectRole = function (role) {
-		$scope.selectedRole = role;
-	};
-	
-	$scope.hasSelectedRole = function () {
-		//console.log($scope.selectedRole != null);
-		return $scope.selectedRole != null;
-	};
-	
-	$scope.showNewRoleForm = function(){
-		$scope.newRole = {};
-	}
-	$scope.loadRoles();
 }]);

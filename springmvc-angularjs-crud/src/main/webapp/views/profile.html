@@ -1,11 +1,17 @@
 
 <div class="col-md-4">
-<form role="form">
+<form role="form" name="userInfoForm" novalidate>
 
 	<h1>User Info</h1>
 	
-	<div class="form-group">
-		<label>E-mail</label> <input class="form-control" type="email" ng-model="user.email">
+	<div class="form-group" ng-class="getCssClasses(userInfoForm.email)">
+		<label>E-mail</label> <input class="form-control" type="email" name="email" required ng-model="user.email">
+		<span ng-show="showError(userInfoForm.email, 'email')">
+			You must enter a valid email
+		</span>
+		<span ng-show="showError(userInfoForm.email, 'required')">
+			This field is required
+		</span>
 	</div>
 	<div class="form-group">
 		<label>Last name</label> <input class="form-control" type="text" ng-model="user.lastName">
@@ -50,7 +56,9 @@
 		</select>
 	</div>
 	
-	
+	<div class="form-group">
+		<button ng-disabled="!canSave()" class="btn btn-primary">Save</button>
+	</div>
 	
 	
 	

@@ -109,3 +109,14 @@ body {
 .placeholder img {
   border-radius: 50%;
 }
+
+/*
+.ng-pristine { border: solid black 1px; }
+.ng-dirty { border: solid black 3px; }
+
+.ng-valid.ng-dirty { border: solid green 3px; }
+.ng-invalid.ng-dirty { border: solid red 3px; }
+*/
+
+input.ng-dirty.ng-invalid{border:1px solid red;}
+input.ng-dirty.ng-valid{border:1px solid green;}
