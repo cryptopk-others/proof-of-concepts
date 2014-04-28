@@ -1,4 +1,4 @@
-package com.sivalabs.discuzz.services;
+package com.sivalabs.discuzz.core.services;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sivalabs.discuzz.entities.User;
-import com.sivalabs.discuzz.repositories.RoleRepository;
-import com.sivalabs.discuzz.repositories.UserRepository;
+import com.sivalabs.discuzz.core.entities.User;
+import com.sivalabs.discuzz.core.repositories.RoleRepository;
+import com.sivalabs.discuzz.core.repositories.UserRepository;
 
 /**
  * @author Siva

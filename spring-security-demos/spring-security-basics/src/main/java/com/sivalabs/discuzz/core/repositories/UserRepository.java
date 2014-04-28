@@ -1,9 +1,9 @@
-package com.sivalabs.discuzz.repositories;
+package com.sivalabs.discuzz.core.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sivalabs.discuzz.entities.User;
+import com.sivalabs.discuzz.core.entities.User;
 
 /**
  * @author Siva

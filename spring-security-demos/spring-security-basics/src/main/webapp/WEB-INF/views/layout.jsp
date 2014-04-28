@@ -5,16 +5,18 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Discuzz</title>
-        
-        <script type="text/javascript" src='<spring:url value="resources/jquery/jquery-1.10.2.js"/>'></script>
-        <link rel="stylesheet" href='<spring:url value="resources/bootstrap/css/bootstrap.min.css"/>' />
-        <link rel="stylesheet" href='<spring:url value="resources/bootstrap/css/bootstrap-theme.min.css"/>' />
-        <script type="text/javascript" src='<spring:url value="resources/bootstrap/js/bootstrap.min.js"/>'></script>
-        <link rel="stylesheet" href='<spring:url value="resources/css/styles.css"/>' />
-        <script type="text/javascript" src='<spring:url value="resources/js/app.js"/>'></script>
-        
-        <decorator:head/>        
+<title>SivaLabs</title>
+<base href="${rootUrl}"/>
+
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap-theme.min.css" />
+<script type="text/javascript" src="resources/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="resources/css/styles.css" />
+<script type="text/javascript" src="resources/js/app.js"></script>
+ 
+<decorator:head/>        
 </head>
 <body>
 
@@ -27,16 +29,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="welcome">Discuzz</a>
+          <a class="navbar-brand" href="welcome">SivaLabs</a>
         </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="welcome">Home</a></li>
-            <sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="admin">Administration</a></li></sec:authorize>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="logout">Logout</a></li>
-          </ul>
-        </div><!-- /.nav-collapse -->
+        <sec:authorize access="authenticated" var="authenticated"/>
+        <c:choose>
+        	<c:when test="${authenticated}">
+        		<div class="collapse navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li class="active"><a href="welcome">Home</a></li>
+		            <sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="admin">Administration</a></li></sec:authorize>
+		            <li><a href="#contact">Contact</a></li>
+		            <li><a href="logout">Logout</a></li>
+		          </ul>
+		        </div>
+        	</c:when>
+        	<c:otherwise>
+        		<div class="collapse navbar-collapse">
+		          <ul class="nav navbar-nav">
+		            <li class="active"><a href="login/form">Login</a></li>
+		            <li><a href="register">Register</a></li>
+		          </ul>
+		        </div>
+        	</c:otherwise>
+        </c:choose>
+        
+
       </div><!-- /.container -->
     </div><!-- /.navbar -->
     

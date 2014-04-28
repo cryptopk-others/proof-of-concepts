@@ -1,4 +1,4 @@
-package com.sivalabs.discuzz.rest.model;
+package com.sivalabs.discuzz.web.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,6 +12,9 @@
 </head>
 <body>
 	Welcome
+	<c:url var="logoutUrl" value="/logout"/>
+	<a href="${logoutUrl}">Logout</a>
+
     
 </body>
 </html>

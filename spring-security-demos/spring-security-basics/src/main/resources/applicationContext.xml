@@ -33,7 +33,7 @@
 	
  	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
-	<jpa:repositories base-package="com.sivalabs.discuzz.repositories"/>
+	<jpa:repositories base-package="com.sivalabs.discuzz.core.repositories"/>
 	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
        		p:entityManagerFactory-ref="entityManagerFactory"/>
@@ -50,7 +50,7 @@
        			<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
        		</props>
        	</property>
-       	<property name="packagesToScan" value="com.sivalabs.discuzz.entities"/>
+       	<property name="packagesToScan" value="com.sivalabs.discuzz.core.entities"/>
        	<property name="loadTimeWeaver">
           <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
         </property>

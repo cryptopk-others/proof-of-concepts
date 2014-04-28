@@ -3,9 +3,17 @@
 <html>
 <head>
 <title>Login</title>
-<link rel="stylesheet" href='<spring:url value="resources/css/styles.css"/>' />
-<script type="text/javascript" src='<spring:url value="resources/jquery/jquery-1.10.2.js"/>'></script>
-<script type="text/javascript" src='<spring:url value="resources/js/app.js"/>'></script>
+<base href="${rootUrl}"/>
+
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap-theme.min.css" />
+<script type="text/javascript" src="resources/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="resources/css/styles.css" />
+<script type="text/javascript" src="resources/js/app.js"></script>
+        
+        
 <script type="text/javascript">
 $(document).ready(function() {
 	//console.log("ready!");
@@ -14,22 +22,23 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-		<div>	
-		<c:if test="${ERROR != null}">
-             <div>
-                 ${ERROR}
-             </div>
-         </c:if>
-         <c:if test="${msg != null}">
-             <div>
-                 ${msg}
-             </div>
-         </c:if>	
-         </div>  
-            
-		<div>	
+		<div class="col-md-6 col-md-offset-3">
+			<c:if test="${param.error != null}">
+				<div class="alert alert-error">
+					Failed to login.
+					<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+						Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+					</c:if>
+				</div>
+			</c:if>
+			<c:if test="${param.logout != null}">
+				<div class="alert alert-success">You have been logged out.</div>
+			</c:if>
+		</div>  
+        <c:url value="/login" var="loginUrl"/>    
+		<div class="col-md-6 col-md-offset-3">	
+			<form id="loginForm" method="post" action="${loginUrl}">
 			<h2>User Login Form</h2>
-			<form:form id="loginForm" method="post" action="login" modelAttribute="user" cssStyle="width: 800px; margin: 0 auto;">
 			<table>
 			  <tr>
 			    <td>UserName</td>
@@ -50,7 +59,7 @@ $(document).ready(function() {
 			  
 			</table>
 		  
-		</form:form>
+		</form>
 	</div>
 
 	

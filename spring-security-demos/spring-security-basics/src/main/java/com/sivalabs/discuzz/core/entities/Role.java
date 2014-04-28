@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sivalabs.discuzz.entities;
+package com.sivalabs.discuzz.core.entities;
 
 import java.io.Serializable;
 
