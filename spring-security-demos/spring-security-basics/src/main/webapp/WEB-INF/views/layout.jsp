@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <%@ include file="taglib.jsp" %>
-
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,27 +30,22 @@
           <a class="navbar-brand" href="welcome">SivaLabs</a>
         </div>
         <sec:authorize access="authenticated" var="authenticated"/>
-        <c:choose>
-        	<c:when test="${authenticated}">
-        		<div class="collapse navbar-collapse">
-		          <ul class="nav navbar-nav">
-		            <li class="active"><a href="welcome">Home</a></li>
-		            <sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="admin">Administration</a></li></sec:authorize>
-		            <li><a href="#contact">Contact</a></li>
-		            <li><a href="logout">Logout</a></li>
-		          </ul>
-		        </div>
-        	</c:when>
-        	<c:otherwise>
-        		<div class="collapse navbar-collapse">
-		          <ul class="nav navbar-nav">
-		            <li class="active"><a href="login/form">Login</a></li>
-		            <li><a href="register">Register</a></li>
-		          </ul>
-		        </div>
-        	</c:otherwise>
-        </c:choose>
-        
+        <div class="collapse navbar-collapse">
+        	<ul class="nav navbar-nav navbar-right">
+	        <c:choose>
+	        	<c:when test="${authenticated}">
+			            <li class="active"><a href="#">Welcome <sec:authentication property="name" /></a></li>
+			            <sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="admin">Administration</a></li></sec:authorize>
+			            <li><a href="#contact">Contact</a></li>
+			            <li><a href="logout">Logout</a></li>
+	        	</c:when>
+	        	<c:otherwise>
+			            <li class="active"><a href="login/form">Login</a></li>
+			            <li><a href="register">Register</a></li>
+	        	</c:otherwise>
+	        </c:choose>
+	        </ul>
+        </div>
 
       </div><!-- /.container -->
     </div><!-- /.navbar -->

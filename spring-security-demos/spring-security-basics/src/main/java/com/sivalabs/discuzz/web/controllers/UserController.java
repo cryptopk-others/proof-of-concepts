@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sivalabs.discuzz.core.entities.User;
+import com.sivalabs.discuzz.core.services.UserContext;
 import com.sivalabs.discuzz.core.services.UserService;
 
 /**
@@ -27,6 +28,8 @@ import com.sivalabs.discuzz.core.services.UserService;
 @Controller
 public class UserController
 {
+	@Autowired private UserContext userContext;
+	
 	@InitBinder
 	private void dateBinder(WebDataBinder binder)
 	{
@@ -37,7 +40,8 @@ public class UserController
 	
 	@Autowired
 	private UserService userService;
-
+	
+	/*
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginForm(Model model)
 	{
@@ -66,6 +70,7 @@ public class UserController
 		}
 		return "login";
 	}
+	*/
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registrationForm(Model model)
@@ -75,18 +80,19 @@ public class UserController
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String handleRegistration(@ModelAttribute("user") User user, BindingResult errors, Model model,RedirectAttributes redirectAttributes)
+	public String handleRegistration(@ModelAttribute("user") User user, BindingResult errors, Model model, RedirectAttributes redirectAttributes)
 	{
 		if (errors.hasErrors()) {
 			return "register";
 		}
 		try {
 			userService.createUser(user);
+			userContext.setCurrentUser(user);
 			redirectAttributes.addFlashAttribute("msg", "You have registered successfully");
-			return "redirect:login";
+			return "redirect:welcome";
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("ERROR", e.getMessage());
+			model.addAttribute("error", e.getMessage());
 			return "register";
 		}
 	}

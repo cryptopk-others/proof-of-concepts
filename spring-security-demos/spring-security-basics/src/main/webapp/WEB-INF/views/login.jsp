@@ -3,23 +3,6 @@
 <html>
 <head>
 <title>Login</title>
-<base href="${rootUrl}"/>
-
-<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resources/bootstrap/css/bootstrap-theme.min.css" />
-<script type="text/javascript" src="resources/jquery/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="resources/css/styles.css" />
-<script type="text/javascript" src="resources/js/app.js"></script>
-        
-        
-<script type="text/javascript">
-$(document).ready(function() {
-	//console.log("ready!");
-	
-});
-</script>
 </head>
 <body>
 		<div class="col-md-6 col-md-offset-3">

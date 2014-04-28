@@ -1,8 +1,14 @@
 package com.sivalabs.discuzz.core.services;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +25,9 @@ import com.sivalabs.discuzz.core.repositories.UserRepository;
 public class UserService
 {
 	@Autowired
+	private UserDetailsManager userDetailsManager;
+	
+	@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
@@ -26,9 +35,15 @@ public class UserService
 
 	public void createUser(User user)
 	{
-		if(checkEmailExists(user.getEmail())){
+		if(findByEmail(user.getEmail()) != null){
 			throw new RuntimeException("Email ["+user.getEmail()+"] already exist");
 		}
+		
+		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities );
+		userDetailsManager.createUser(userDetails);
+		
 		userRepository.save(user);
 	}
 	
@@ -52,9 +67,9 @@ public class UserService
 		return userRepository.findAll();
 	}
 
-	public boolean checkEmailExists(String email)
+	public User findByEmail(String email)
 	{
-		return userRepository.findByEmail(email) != null;
+		return userRepository.findByEmail(email);
 	}
 
 	public User login(String email, String password)

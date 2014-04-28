@@ -19,6 +19,7 @@
 		 
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/login/*" access="permitAll"/>
+		<intercept-url pattern="/register*" access="permitAll"/>
 		<intercept-url pattern="/logout" access="permitAll"/>
 		<intercept-url pattern="/admin/" access="hasRole('ROLE_ADMIN')"/>
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/> 
@@ -37,8 +38,8 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_ADMIN,ROLE_USER" />
-				<user name="siva" password="siva" authorities="ROLE_USER" />				
+				<user name="admin@gmail.com" password="admin" authorities="ROLE_ADMIN,ROLE_USER" />
+				<user name="siva@gmail.com" password="siva" authorities="ROLE_USER" />				
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>

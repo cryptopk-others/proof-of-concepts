@@ -2,7 +2,7 @@
 <%@include file="taglib.jsp" %>
 <html>
 <head>
-<title>Create User</title>
+<title>Registration</title>
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -23,18 +23,15 @@ $(document).ready(function() {
 </head>
 <body>
 
-<div class="col-md-6 col-md-offset-2">	
-<c:if test="${ERROR != null }">
+<div >	
+		<c:if test="${error != null }">
 			<div class="alert alert-danger">
-				<p>${ERROR}
+				<p>${error}
 			</div>
 		</c:if>
-		</div>
-		
-<div class="row">
 		<div class="col-md-6 col-md-offset-2">	
 			<h2>User Registration Form</h2>
-			<form:form id="registrationForm" method="post" action="register" modelAttribute="user" cssStyle="width: 800px; margin: 0 auto;" class="form-horizontal" role="form">
+			<form:form id="registrationForm" method="post" action="register" modelAttribute="user" class="form-horizontal" role="form">
 		  <div class="form-group">
 		    <label for="email" class="col-sm-2 control-label">Email*</label>
 		    <div class="col-sm-4">
@@ -80,7 +77,7 @@ $(document).ready(function() {
 		  </div>
 		   <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-4">
-		      Already Registered? <a href="login">Login</a>
+		      Already Registered? <a href="login/form">Login</a>
 		    </div>
 		  </div>
 		  
