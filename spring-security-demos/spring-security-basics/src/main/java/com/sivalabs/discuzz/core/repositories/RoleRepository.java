@@ -11,4 +11,6 @@ import com.sivalabs.discuzz.core.entities.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer>
 {
 
+	Role findByRoleName(String string);
+
 }

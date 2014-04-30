@@ -34,7 +34,7 @@
         	<ul class="nav navbar-nav navbar-right">
 	        <c:choose>
 	        	<c:when test="${authenticated}">
-			            <li class="active"><a href="#">Welcome <sec:authentication property="name" /></a></li>
+			            <li class="active"><a href="#">Welcome <sec:authentication property="principal.name" /></a></li>
 			            <sec:authorize access="hasRole('ROLE_ADMIN')"><li><a href="admin">Administration</a></li></sec:authorize>
 			            <li><a href="#contact">Contact</a></li>
 			            <li><a href="logout">Logout</a></li>

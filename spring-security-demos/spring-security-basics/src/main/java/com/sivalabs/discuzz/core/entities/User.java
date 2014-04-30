@@ -6,15 +6,13 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,7 +25,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * 
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
 public class User implements Serializable
 {
@@ -47,10 +45,10 @@ public class User implements Serializable
 	
 	@Temporal(TemporalType.DATE)
 	private Date dob;
+	
 	private boolean enabled=true;
 	
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id")
+	@ManyToMany(fetch=FetchType.EAGER, mappedBy="users")
 	private Set<Role> roles = new HashSet<>();
 	
 	
@@ -150,6 +148,10 @@ public class User implements Serializable
 	}
 
 	public Set<Role> getRoles() {
+		if(roles == null)
+		{
+			roles = new HashSet<>();
+		}
 		return roles;
 	}
 
@@ -160,5 +162,8 @@ public class User implements Serializable
 	public void addRoles(Role... roles) {
 		this.roles.addAll(Arrays.asList(roles));
 	}
-
+	public String getName()
+	{
+		return firstName+" "+lastName;
+	}
 }

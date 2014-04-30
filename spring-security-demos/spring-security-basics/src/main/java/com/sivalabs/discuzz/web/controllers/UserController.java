@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sivalabs.discuzz.core.entities.User;
-import com.sivalabs.discuzz.core.services.UserContext;
+import com.sivalabs.discuzz.core.security.UserContext;
 import com.sivalabs.discuzz.core.services.UserService;
 
 /**

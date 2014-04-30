@@ -4,12 +4,17 @@
 package com.sivalabs.discuzz.core.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +22,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "ROLE")
+@Table(name = "ROLES")
 public class Role implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +32,11 @@ public class Role implements Serializable
 	private Integer id;
 	@Column(name="role_name",nullable=false)
 	private String roleName;
+	
+	@ManyToMany
+	@JoinTable(name="USERS_ROLES", joinColumns=@JoinColumn(name="ROLE_ID", referencedColumnName="ROLE_ID"),
+	inverseJoinColumns=@JoinColumn(name="USER_ID", referencedColumnName="USER_ID"))
+	private Set<User> users = new HashSet<>();
 	
 	public Role() {
 	}
@@ -50,5 +60,16 @@ public class Role implements Serializable
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-
+	public Set<User> getUsers()
+	{
+		if(users == null)
+		{
+			users = new HashSet<>();
+		}
+		return users;
+	}
+	public void setUsers(Set<User> users)
+	{
+		this.users = users;
+	}
 }

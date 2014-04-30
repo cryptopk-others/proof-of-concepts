@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sivalabs.discuzz.core.services;
+package com.sivalabs.discuzz.core.security;
 
 import com.sivalabs.discuzz.core.entities.User;
 

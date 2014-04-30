@@ -1,17 +1,12 @@
 package com.sivalabs.discuzz.core.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sivalabs.discuzz.core.entities.Role;
 import com.sivalabs.discuzz.core.entities.User;
 import com.sivalabs.discuzz.core.repositories.RoleRepository;
 import com.sivalabs.discuzz.core.repositories.UserRepository;
@@ -24,8 +19,8 @@ import com.sivalabs.discuzz.core.repositories.UserRepository;
 @Transactional
 public class UserService
 {
-	@Autowired
-	private UserDetailsManager userDetailsManager;
+	//@Autowired
+	//private UserDetailsManager userDetailsManager;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -39,10 +34,14 @@ public class UserService
 			throw new RuntimeException("Email ["+user.getEmail()+"] already exist");
 		}
 		
-		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities );
-		userDetailsManager.createUser(userDetails);
+		//Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		//authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		//UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities );
+		//userDetailsManager.createUser(userDetails);
+		
+		Role role = roleRepository.findByRoleName("ROLE_USER");
+		user.getRoles().add(role);
+		role.getUsers().add(user);
 		
 		userRepository.save(user);
 	}
