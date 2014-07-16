@@ -1,13 +1,11 @@
-var phonebookControllers = angular.module('phonebookControllers', []);
+var myAppControllers = angular.module('myAppControllers', []);
  
-phonebookControllers.controller('PhonebookListCtrl', ['$scope', 'PhoneBook', 
+myAppControllers.controller('WelcomeCtrl', ['$scope', 'PhoneBook', 
         function($scope, PhoneBook){
 			var resp = PhoneBook.query();
 			$scope.contacts = resp;
 
-			$scope.someObject = {
-					'id':'1', 'name':'siva', 'address':{'city':'Hyd', 'state':'AP'}, 'emails':['a@mail.com','b@mail.com']
-				};
+			
 			
 		}
 ]);

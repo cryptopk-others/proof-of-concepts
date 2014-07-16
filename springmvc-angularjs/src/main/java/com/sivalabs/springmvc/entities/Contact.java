@@ -14,12 +14,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author Siva
  * 
  */
 @Entity
 @Table(name = "CONTACTS")
+@JsonIgnoreProperties({"user"})
 public class Contact implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -31,6 +34,8 @@ public class Contact implements Serializable
 	private String firstName;
 	@Column(name = "lastname", length = 50)
 	private String lastName;
+	@Column(name = "phone", length = 15)
+	private String phone;
 	@Column(name = "email", nullable = false, unique = true, length = 50)
 	private String email;
 	@Temporal(TemporalType.DATE)
@@ -48,8 +53,6 @@ public class Contact implements Serializable
 	{
 		this.id = id;
 	}
-
-	
 
 	public Integer getId()
 	{
@@ -100,6 +103,22 @@ public class Contact implements Serializable
 	public void setDob(Date dob)
 	{
 		this.dob = dob;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

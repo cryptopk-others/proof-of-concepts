@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sivalabs.springmvc.entities.Contact;
-import com.sivalabs.springmvc.entities.Role;
 import com.sivalabs.springmvc.entities.User;
-import com.sivalabs.springmvc.repositories.RoleRepository;
 import com.sivalabs.springmvc.repositories.UserRepository;
 
 /**
@@ -23,14 +21,8 @@ public class UserService
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private RoleRepository roleRepository;
-
 	public void createUser(User user)
 	{
-		if(checkUserNameExists(user.getUserName())){
-			throw new RuntimeException("UserName ["+user.getUserName()+"] already exist");
-		}
 		if(checkEmailExists(user.getEmail())){
 			throw new RuntimeException("Email ["+user.getEmail()+"] already exist");
 		}
@@ -52,18 +44,9 @@ public class UserService
 		return userRepository.findByEmail(email) != null;
 	}
 
-	public boolean checkUserNameExists(String userName)
+	public User login(String email, String password)
 	{
-		return userRepository.findByUserName(userName) != null;
-	}
-
-	public User login(String userName, String password)
-	{
-		return userRepository.findByUserNameAndPassword(userName, password);
-	}
-
-	public void addRole(Role role) {
-		roleRepository.save(role);
+		return userRepository.findByEmailAndPassword(email, password);
 	}
 
 	public List<Contact> findUserContacts(int userId) {

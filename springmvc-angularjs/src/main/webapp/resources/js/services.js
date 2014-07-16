@@ -1,6 +1,6 @@
-var phonebookServices = angular.module('phonebookServices', ['ngResource']);
+var myAppServices = angular.module('myAppServices', ['ngResource']);
  
-phonebookServices.factory('PhoneBook', ['$resource',
+myAppServices.factory('PhoneBook', ['$resource',
   function($resource){
     return $resource('users/list', {}, {
       query: {method:'GET', params:{}, isArray: true}
