@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="hlApp">
+<head>
+  <meta charset="utf-8"/>
+  <title>HealthyLiving</title>
+  <link rel="stylesheet" href="webjars/bootstrap/3.2.0/css/bootstrap.css"/>
+  <link rel="stylesheet" href="webjars/ng-grid/2.0.12/ng-grid.css" />
+  <link rel="stylesheet" href="styles/main.css">
+  
+  	<script src="webjars/jquery/1.11.1/jquery.js"></script>
+	<!-- <script src="webjars/bootstrap/3.2.0/js/bootstrap.js"></script> -->
+	<script src="webjars/angularjs/1.2.19/angular.js"></script>
+	<script src="webjars/angularjs/1.2.19/angular-route.js"></script>
+	<script src="webjars/angularjs/1.2.19/angular-resource.js"></script>
+	<script src="webjars/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+	<script src="webjars/angular-ui-bootstrap/0.11.0/ui-bootstrap-tpls.js"></script>
+	<script src="webjars/ng-grid/2.0.12/ng-grid.js"></script>
+	
+	<script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/articles.js"></script>
+    <script src="scripts/controllers/gallery.js"></script>
+    <script src="scripts/controllers/subscribers.js"></script>
+    
+	
+</head>
+<body>
+      
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Healthy Living</a> 
+
+        <ul class="nav navbar-nav">
+            <li> <a href="#/articles">Articles</a>
+            </li>
+            <li> <a href="#/gallery">Gallery</a>
+            </li>
+            <li> <a href="#/subscribers">Subscribers</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<!-- Add your site or application content here -->
+<div class="container" ng-view=""></div>
+
+      
+
+</body>
+   
+</html>

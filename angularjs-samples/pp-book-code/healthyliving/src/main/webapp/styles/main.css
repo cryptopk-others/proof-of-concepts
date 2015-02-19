@@ -1,0 +1,43 @@
+body{
+  padding-top: 50px;
+}
+
+.carousel-image{
+  width: 100%;
+}
+
+.hero-unit {
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 60px;
+}
+
+.thumbnails img{
+width:100%
+}
+
+.gridStyles{
+ width:940px;
+    height:300px;
+}
+
+.ngRow.even {
+    background: AliceBlue;
+}
+.ngRow.odd {
+    background: YellowGreen;
+}
+
+.modal-body input{
+display:block;
+}
+
+.ng-valid{
+    border: thin solid #090;
+}
+.ng-invalid{
+    border: thin solid #990000;
+}

@@ -1,0 +1,213 @@
+
+Ext.define('CustomerGrid',{
+	extend: 'Ext.container.Container',
+	xtype: 'CustomerGrid',
+	height: 500,
+	width: 400,
+	layout: 'vbox',
+	
+	constructor: function(config)
+	{
+		var me = this;
+		console.log('constructor');
+		me.curStore = me.getMyStore();
+		
+		me.callParent(arguments);
+	},
+	
+	initComponent: function()
+	{
+		var me = this;
+		console.log('initComponent');
+		var searchPanel = {
+				xtype: 'container',
+				layout: 'hbox',
+				width: 300,
+				items:[
+				       {
+				    	   xtype: 'textfield',
+				    	   name: 'searchCriteria',
+				    	   itemId: 'searchCriteria'
+				       },
+				       {
+				    	   xtype: 'button',
+				    	   text: 'Search',
+				    	   handler: function()
+				    	   {
+				    		   //alert('search');
+				    		   var payload ={
+				    				   query: Ext.ComponentQuery.query('#searchCriteria')[0].getValue()
+				    		   };
+				    		   me.performSearch(payload);
+				    	   },
+				    	   scope: me
+				       },
+				       {
+				    	   xtype: 'button',
+				    	   text: 'Reset',
+				    	   handler: function()
+				    	   {
+				    		   
+				    		   me.switchGrid();
+				    	   },
+				    	   scope: me
+				       }
+				]
+		};
+		
+		var userStore = Ext.create('Ext.data.Store', {			
+		    fields:['id','username', 'email'],
+		    /*
+		    data:{'items':[
+		        { 'name': 'Lisa',  "email":"lisa@simpsons.com",  "phone":"555-111-1224"  },
+		        { 'name': 'Bart',  "email":"bart@simpsons.com",  "phone":"555-222-1234" },
+		        { 'name': 'Homer', "email":"home@simpsons.com",  "phone":"555-222-1244"  },
+		        { 'name': 'Marge', "email":"marge@simpsons.com", "phone":"555-222-1254"  }
+		    ]},
+		    */
+		    proxy: {
+		        type: 'ajax',
+		        url: 'searchUsers.json',
+		        reader: {
+		            type: 'json',
+		            root: 'users'
+		        }
+		    },
+		    
+		     autoLoad: true
+		});
+
+		var searchResultsGrid = Ext.create('Ext.grid.Panel', {
+		    itemId: 'userGridId',
+			title: 'Users Grid',
+		    store: userStore,		    
+		    columns: [
+                { text: 'Id', dataIndex: 'id' },
+		        { text: 'Name',  dataIndex: 'username' },
+		        { text: 'Email', dataIndex: 'email', flex: 1 }
+		    ],
+		    
+		    height: 200,
+		    width: 400
+		});
+		
+		
+		me.items = [
+		            {
+		            	xtype: 'container',
+		            	itemId: 'mainContainer',
+		            	layout: 'vbox',
+		            	items : [searchPanel, searchResultsGrid]
+		            }
+		            
+		            ];
+		
+		
+		
+		me.callParent(arguments);
+	},
+	
+	
+	getMyStore: function()
+	{
+		var me = this;
+		
+		var userStore = Ext.create('Ext.data.Store', {			
+		    fields:['id','username', 'email'],
+		    /*
+		    data:{'items':[
+		        { 'name': 'Lisa',  "email":"lisa@simpsons.com",  "phone":"555-111-1224"  },
+		        { 'name': 'Bart',  "email":"bart@simpsons.com",  "phone":"555-222-1234" },
+		        { 'name': 'Homer', "email":"home@simpsons.com",  "phone":"555-222-1244"  },
+		        { 'name': 'Marge', "email":"marge@simpsons.com", "phone":"555-222-1254"  }
+		    ]},
+		    */
+		    proxy: {
+		        type: 'ajax',
+		        url: 'searchUsers.json',
+		        reader: {
+		            type: 'json',
+		            root: 'users'
+		        }
+		    },		    
+		   // autoLoad: true,
+		    listeners: {
+		    	'load': function(store, records, successful, eOpts){
+		    		me.curColModel = [
+		    		                { text: 'Id', dataIndex: 'id' },
+		    		  		        { text: 'Name',  dataIndex: 'username' },
+		    		  		        { text: 'Email', dataIndex: 'email', flex: 1 }
+		    		  		    ];
+		    		me.rendersResultsGrid();
+		    	}
+		    }
+		});
+		
+		//me.curStore = userStore;
+		return userStore;
+	},
+	
+	performSearch : function(payload)
+	{
+		var me = this;
+		console.log('performSearch :'+payload.query);
+		//var grid = Ext.ComponentQuery.query('#userGridId')[0];
+		
+		me.curStore = me.getMyStore();
+		curStore.reload({
+			params: {
+				query : payload.query
+			}
+		});
+		//me.rendersResultsGrid();
+		
+	},
+	
+	switchGrid: function()
+	{
+		var dummyStore = Ext.create('Ext.data.Store', {			
+		    fields:['phone','name', 'email'],
+		    
+		    data:{'items':[
+		        { 'name': 'Lisa',  "email":"lisa@simpsons.com",  "phone":"555-111-1224"  },
+		        { 'name': 'Bart',  "email":"bart@simpsons.com",  "phone":"555-222-1234" },
+		        { 'name': 'Homer', "email":"home@simpsons.com",  "phone":"555-222-1244"  },
+		        { 'name': 'Marge', "email":"marge@simpsons.com", "phone":"555-222-1254"  }
+		    ]},
+		    
+		    proxy: {
+		        type: 'memory',
+		        reader: {
+		            type: 'json',
+		            root: 'items'
+		        }
+		    },
+		    autoLoad: true
+		});
+		
+		var newColumns = [
+	                { text: 'Phone', dataIndex: 'phone' },
+			        { text: 'Name',  dataIndex: 'name' },
+			        { text: 'Email', dataIndex: 'email', flex: 1 }
+			    ];
+		
+		//var grid = Ext.ComponentQuery.query('#userGridId')[0];
+		//grid.reconfigure(dummyStore, newColumns);
+		
+		me.curStore = dummyStore;
+		me.curColModel = newColumns;
+		
+		me.rendersResultsGrid();
+	},
+	
+	rendersResultsGrid : function()
+	{
+		var me = this;
+		var curStore = me.curStore;
+		var curColModel = me.curColModel;
+		var grid = Ext.ComponentQuery.query('#userGridId')[0];
+		grid.reconfigure(curStore, curColModel);
+	}
+	
+	
+});

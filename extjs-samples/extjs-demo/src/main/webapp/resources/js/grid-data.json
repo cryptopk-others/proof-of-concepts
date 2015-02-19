@@ -1,0 +1,36 @@
+{
+    "count": 1,
+    "ok": true,
+    "msg": "Users found",
+    "users": [
+    		{
+		        "userId": 123,
+		        "name": "Ed Spencer",
+		        "email": "ed@sencha.com"
+		    },
+		    {
+		        "userId": 1231,
+		        "name": "Ed Spencer1",
+		        "email": "ed@sencha1.com"
+		    }
+    
+    ],
+    "metaData": {
+    	"totalProperty": 'count',
+        "successProperty": 'ok',
+        "messageProperty": 'msg',
+        "root": "users",
+        
+        "fields": [
+            { "name": "userId", "type": "int" },
+            { "name": "name", "type": "string" },
+            { "name": "birthday", "type": "date", "dateFormat": "Y-j-m" },
+        	],
+        "columns": [
+            { "text": "User ID", "dataIndex": "userId", "width": 40 },
+            { "text": "User Name", "dataIndex": "name", "flex": 1 },
+            { "text": "Birthday", "dataIndex": "birthday", "flex": 1, "format": 'Y-j-m', "xtype": "datecolumn" }
+        ]
+    
+    }
+}

@@ -1,0 +1,4 @@
+liferay-samples
+===============
+
+Liferay samples
