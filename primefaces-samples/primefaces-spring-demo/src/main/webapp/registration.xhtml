@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/layout.xhtml">
+
+	<ui:define name="bodyContent">
+
+            <h:form id="form1">
+				<p:growl/>
+				<p:panel header="User Registration Form">
+				
+				<h:panelGrid columns="2">
+					<p:outputLabel value="UserName"/>
+					<p:inputText value="#{userManagedBean.registerUser.username}" 
+								 required="true" requiredMessage="UserName is required"/>
+					
+					<p:outputLabel value="Password"/>
+					<p:password value="#{userManagedBean.registerUser.password}"
+									required="true" requiredMessage="Password is mandatory" />
+					
+					<p:outputLabel value="Email"/>
+					<p:inputText value="#{userManagedBean.registerUser.email}" validatorMessage="Invalid Email">
+						<f:validateRegex pattern="[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]{2,3}"></f:validateRegex>
+					</p:inputText>
+					
+					<p:outputLabel value="D.O.B"/>
+					<p:calendar value="#{userManagedBean.registerUser.dob}" pattern="yyyy-MM-dd"></p:calendar>
+										
+					<p:commandButton action="#{userManagedBean.register}" value="Register" ajax="false"></p:commandButton>
+				</h:panelGrid>
+				</p:panel>
+			</h:form>
+			
+			<p><p:link value="Login" outcome="login"></p:link></p>
+            
+</ui:define>
+</ui:composition>
+

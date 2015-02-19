@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Login</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+			<h:form id="form1">
+				<p:messages/>
+				
+				<h:panelGrid columns="2">
+					<p:outputLabel value="UserName"/>
+					<p:inputText value="#{userManagedBean.loginUser.username}"/>
+					
+					<p:outputLabel value="Password"/>
+					<p:password value="#{userManagedBean.loginUser.password}"/>
+					
+					<p:commandButton action="#{userManagedBean.login}" value="Login" ajax="false"></p:commandButton>
+				</h:panelGrid>
+			</h:form>
+            
+            <p><p:link value="Registration" outcome="registration"></p:link></p>
+            
+        </h:body>
+
+    </f:view>
+</html>
+

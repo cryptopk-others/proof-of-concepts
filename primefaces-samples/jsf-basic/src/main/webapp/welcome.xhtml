@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Welcome</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+				<h2>Welcome</h2>
+				<p><h:link value="Home" outcome="index"></h:link></p>
+				<h:form id="form1">
+            	<div>
+            		<p>Enter your name: 
+            		<h:inputText id="name" value="#{userManagedBean.name}">
+            			<f:ajax event="keyup" execute="name" render="hello"></f:ajax>
+            		</h:inputText>
+            		</p>
+            		<div><h:outputText  id="hello" value="#{userManagedBean.greeting}"></h:outputText> </div> 
+            	</div>
+            	</h:form>
+        </h:body>
+
+    </f:view>
+</html>
+

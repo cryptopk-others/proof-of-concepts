@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>Welcome</title>
+		</f:facet>
+	</h:head>
+
+	<h:body>
+		<p:calendar></p:calendar>
+		<div class="ui-grid headerDiv ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12">header</div>
+			</div>
+		</div>
+		<div class="ui-grid  ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-2 menuDiv">
+					<p:menu>
+			            <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
+			            <p:menuitem value="Internal" url="http://www.primefaces.org" icon="ui-icon-star"/>
+				    </p:menu>
+
+				</div>
+				<div class="ui-grid-col-8 contentDiv">wide column</div>
+				<div class="ui-grid-col-2 sidebarDiv">small sidebar column</div>
+			</div>
+		</div>
+		<div class="ui-grid footerDiv  ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12">footer</div>
+			</div>
+		</div>
+
+	</h:body>
+
+</f:view>
+</html>
+
