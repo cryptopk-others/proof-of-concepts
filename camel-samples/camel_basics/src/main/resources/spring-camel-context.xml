@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:broker="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://activemq.apache.org/schema/core 
+						http://activemq.apache.org/schema/core/activemq-core.xsd
+						http://www.springframework.org/schema/jms 
+						http://www.springframework.org/schema/jms/spring-jms.xsd
+						http://camel.apache.org/schema/spring 
+						http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+		<context:property-placeholder location="classpath:application.properties"/>
+		
+		<!-- 
+		<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+			<property name="connectionFactory">
+				<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+					<property name="brokerURL" value="vm://localhost" />
+				</bean>
+			</property>
+		</bean> 
+		-->
+
+		<broker:broker useJmx="true" persistent="false" brokerName="myBroker">
+		    <broker:transportConnectors>
+		      <!-- expose a VM transport for in-JVM transport between AMQ and Camel on the server side -->
+		      <broker:transportConnector name="vm" uri="vm://myBroker"/>
+		      <!-- expose a TCP transport for clients to use -->
+		      <broker:transportConnector name="tcp" uri="tcp://localhost:${tcp.port}"/>
+		    </broker:transportConnectors>
+	  	</broker:broker>
+
+		  <!-- lets configure the Camel ActiveMQ to use the embedded ActiveMQ broker declared above -->
+		  <bean id="jms" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		    <property name="brokerURL" value="vm://myBroker"/>
+		  </bean>
+  
+		<bean id="fileToJmsRoute" class="com.sivalabs.camelexamples.basics.SpringJmsRoute" />
+		<bean id="loggerProcessor" class="com.sivalabs.camelexamples.basics.LoggerProcessor"/>
+		
+		
+		<camelContext xmlns="http://camel.apache.org/schema/spring">
+		
+			<!-- <routeBuilder ref="fileToJmsRoute" /> -->
+			<!-- 
+			<camel:route>
+				<camel:from uri="file:D:/misc/data/inbox"/>
+				<camel:process ref="loggerProcessor"/>
+				<camel:to uri="jms:queue:incomingOrders"/>
+			</camel:route>
+		 -->
+		
+			<!-- 
+			<camel:route>
+				<camel:from uri="file:D:/misc/data/inbox"/>
+				<camel:to uri="jms:queue:incomingOrders"/>
+			</camel:route>
+			
+			<camel:route>
+				<camel:from uri="jms:queue:incomingOrders"/>
+				<camel:process ref="loggerProcessor"/>
+			</camel:route>
+			 -->
+			
+			<camel:route>
+				<camel:from uri="timer://myTimer?fixedRate=true&amp;period=5000"/>
+				<camel:to uri="log:EXAMPLE-ROUTE"/>
+			</camel:route>
+	
+			<camel:route>
+				<camel:from uri="file:D:/misc/data/inbox"/>
+				<camel:to uri="jms:queue:incomingOrders"/>
+			</camel:route>
+			
+			<route>
+				<from uri="jms:incomingOrders"/>
+				<choice>
+					<when>
+						<simple>${header.CamelFileName} regex '^.*xml$'</simple>
+						<to uri="jms:xmlOrders"/>
+					</when>
+					<when>
+						<simple>${header.CamelFileName} regex '^.*(csv|csl)$'</simple>
+						<to uri="jms:csvOrders"/>
+					</when>
+					<otherwise>
+						<to uri="jms:badOrders"/>
+						<stop/>
+					</otherwise>
+				</choice>
+				<to uri="jms:continuedProcessing"/>
+			</route>
+			
+			
+			<camel:route>
+				<camel:from uri="jms:xmlOrders"/>
+				<filter>
+					<xpath>/order[not(@test)]</xpath>
+					<camel:process ref="loggerProcessor"/>
+				</filter>
+			</camel:route>
+			
+			<camel:route>
+				<camel:from uri="jms:continuedProcessing"/>
+				<camel:process ref="loggerProcessor"/>
+			</camel:route>
+			
+		</camelContext>
+		
+		
+		
+</beans>

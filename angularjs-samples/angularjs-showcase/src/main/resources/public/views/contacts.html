@@ -1,0 +1,15 @@
+<br/>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="contact in contacts">
+			<td>{{contact.firstname + ' '+ (contact.lastname || '')}}</td>
+			<td>{{contact.email}}</td>			
+		</tr>
+	</tbody>
+</table>
