@@ -15,7 +15,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-//import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
@@ -31,8 +30,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @ComponentScan(basePackages= "com.sivalabs.myapp")
-@EnableTransactionManagement()
-@EnableJpaRepositories(basePackages="com.sivalabs.myapp")
+@EnableTransactionManagement
+@EnableJpaRepositories
 @PropertySource("classpath:application.properties")
 public class AppConfig 
 {
