@@ -1,0 +1,18 @@
+#code, title, description, price, brand, category
+TV101, LG 32 inch TV, LG 32 inch Smart TV, 25000, LG, TV
+TV102, LG 40 inch TV, LG 40 inch Smart TV, 45000, LG, TV
+TV103, Samsung 32 inch TV, Samsung 32 inch Smart TV, 28000, Samsung, TV
+TV104, Samsung 40 inch TV, Samsung 40 inch Smart TV, 48000, Samsung, TV
+TV105, Sony 32 inch TV, Sony 32 inch Smart TV, 35000, Sony, TV
+
+AC106, LG 3 star AC, LG 3 star Air Cooler, 30000, LG, AC
+AC107, LG 5 star AC, LG 5 star Air Cooler, 40000, LG, AC
+AC108, Samsung 3 star AC, Samsung 3 star Air Cooler, 32000, Samsung, AC
+AC109, Hitachi 3 star AC, Hitachi 3 star Air Cooler, 38000, Hitachi, AC
+AC110, Panasonic 3 star AC, Panasonic 5 star Air Cooler, 32000, Panasonic, AC
+
+FRITZ111, LG 3 star Fritz, LG 3 star Refrigirator, 30000, LG, Refrigirator
+FRITZ112, LG 5 star Fritz, LG 5 star Refrigirator, 35000, LG, Refrigirator
+FRITZ113, Samsung 3 star Fritz, Samsung 3 star Refrigirator, 30000, Samsung, Refrigirator
+FRITZ114, Samsung 4 star Fritz, Samsung 4 star Refrigirator, 36000, Samsung, Refrigirator
+FRITZ115, Samsung 5 star Fritz, Samsung 5 star Refrigirator, 40000, Samsung, Refrigirator
